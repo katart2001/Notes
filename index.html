@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic" rel="stylesheet" />
+    <link rel="stylesheet" href="source/scss/style.css">
+    <title>Notes</title>
+</head>
+<body>
+    <div class="conteiner">
+        <h1 class="main_h1">
+            Notes
+        </h1>
+        <div class="create">
+            <div class="create_flex">
+                <div class="create_hidden">
+                    <button id="toggle" aria-expanded="false" aria-controls="panel" class="create__btn">ADD</button>
+                    <div id="panel" role="dialog" hidden class="create_hidden__flex">
+                        <div class="create_block">
+                            <form class="create_block_form" id="noteForm">
+                                <input class="create_block_form_title" type="text" id="title" name="title" required>
+                                <textarea class="create_block_form_text" id="text" name="text" required></textarea>
+                                <button class="create_block_btn1 type="submit">SAVE</button>
+                                <button class="create_block_btn2" type="submit">RESTET</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="create__block"></div>
+        <div class="block">
+            <div class="block__flex">
+                <div class="modal" id="editModal" aria-hidden="true">
+                <div class="modal__overlay"></div>
+                <div class="modal__dialog" role="dialog" aria-modal="true">
+                    <button type="button" class="modal__close">×</button>
+                    <form id="editForm">
+                    <input class="edit-title" placeholder="Заголовок" />
+                    <textarea class="edit-text" placeholder="Текст"></textarea>
+                    <div class="modal__actions">
+                        <button type="submit" class="btn-save">Сохранить</button>
+                        <button type="button" class="btn-delete-in-modal">Удалить</button>
+                    </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/script.js"> 
+    </script>
+</body>
+</html>

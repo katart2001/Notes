@@ -1,0 +1,469 @@
+@charset "UTF-8";
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+*, :after, :before {
+  box-sizing: border-box;
+}
+
+:active, :focus {
+  outline: 0;
+}
+
+a:active, a:focus {
+  outline: 0;
+}
+
+aside, footer, header, nav {
+  display: block;
+}
+
+body, html {
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  line-height: 1;
+  font-size: 14px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+button, input, t6extarea {
+  font-family: inherit;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+a, a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/* =============== БАЗОВЫЕ НАСТРОЙКИ =============== */
+:root {
+  --bg: #ddd;
+  --ink-1:#1b1b1b;
+  --ink-2:#4c4a4c;
+  --panel:#c4c4c4;
+  --border:#1b1b1b;
+  --radius-lg: 14px;
+  --radius-md: 10px;
+  /* Флюидная типографика */
+  --h1: clamp(28px, 6vw, 62px);
+  --btn: clamp(20px, 4.8vw, 62px);
+  --title: clamp(18px, 2.4vw, 31px);
+  --text: clamp(14px, 2.2vw, 20px);
+  --note-title: clamp(16px, 2.2vw, 18px);
+  --note-text: clamp(14px, 2vw, 15px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  min-height: 100%;
+}
+
+body {
+  font-family: Inter, "PT Serif", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background-color: var(--bg);
+  color: var(--ink-1);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* Контейнер с “резиновыми” отступами */
+.conteiner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-inline: clamp(12px, 3.2vw, 32px);
+}
+
+/* =============== ШАПКА =============== */
+.main_h1 {
+  color: var(--ink-2);
+  font-size: var(--h1);
+  font-weight: 800;
+  line-height: 1.15;
+  text-align: center;
+  padding: clamp(10px, 2.5vw, 24px);
+  word-break: break-word;
+}
+
+/* =============== КНОПКА ADD + ДРОПДАУН =============== */
+.create_flex {
+  display: flex;
+  justify-content: center;
+}
+
+.create__btn {
+  color: #e7e7e7;
+  font-size: var(--btn);
+  font-weight: 700;
+  line-height: 1.1;
+  text-align: center;
+  border-radius: 15px;
+  background: var(--ink-1);
+  padding: clamp(6px, 1.5vw, 10px) clamp(24px, 4.8vw, 70px);
+  transition: transform 0.2s ease, filter 0.2s ease;
+  margin: clamp(8px, 2vw, 16px);
+  border: 0;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.create__btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(0.95);
+}
+
+.create__btn:active {
+  transform: translateY(0);
+}
+
+/* Линия-разделитель */
+.create__block {
+  border: 2px solid var(--ink-2);
+  margin: clamp(20px, 6vw, 60px) 0;
+}
+
+/* Обёртка всплывающего блока — фикс встроен */
+.create_hidden {
+  position: relative;
+  display: flex;
+  justify-content: center; /* ADD по центру */
+  align-items: flex-start;
+}
+
+/* Панель формы — центрируется под кнопкой */
+.create_hidden__flex {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 0.5rem;
+  width: clamp(280px, 92vw, 560px);
+  max-width: 560px;
+  box-sizing: border-box;
+  padding: clamp(10px, 2.2vw, 16px);
+  border: 3px solid var(--ink-1);
+  border-radius: var(--radius-lg);
+  box-shadow: 4px 5px 29px 5px rgba(0, 0, 0, 0.25);
+  background: var(--panel);
+  z-index: 1000;
+}
+
+/* На очень узких — растягиваем панель по экрану */
+@media (max-width: 480px) {
+  .create_hidden {
+    width: 100%;
+  }
+  .create_hidden__flex {
+    left: 0;
+    right: 0;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+/* =============== ФОРМА ДОБАВЛЕНИЯ =============== */
+.create_block_form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  justify-items: stretch;
+}
+
+.create_block_form_title,
+.create_block_form_text {
+  border: 3px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--panel);
+  color: #6a676a;
+  padding: clamp(8px, 1.8vw, 12px);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.create_block_form_title {
+  font-size: var(--title);
+  font-weight: 600;
+}
+
+.create_block_form_text {
+  font-size: var(--text);
+  line-height: 1.5;
+  min-height: 140px;
+  resize: vertical;
+}
+
+/* Кнопки формы */
+.create_block_btn1,
+.create_block_btn2 {
+  border-radius: 15px;
+  background: var(--ink-1);
+  padding: clamp(10px, 2.2vw, 14px) clamp(22px, 4vw, 50px);
+  margin: clamp(6px, 1.8vw, 12px) 6px 0 6px;
+  border: 0;
+  cursor: pointer;
+  font-weight: 800;
+  line-height: 1.1;
+  transition: transform 0.15s ease, filter 0.15s ease;
+  width: auto;
+  max-width: 100%;
+  justify-self: center; /* центр по умолчанию */
+  text-align: center;
+}
+
+.create_block_btn1 {
+  color: rgb(74, 133, 71);
+  font-size: clamp(18px, 3.6vw, 45px);
+}
+
+.create_block_btn2 {
+  color: rgb(198, 54, 54);
+  font-size: clamp(18px, 3.6vw, 45px);
+}
+
+.create_block_btn1:hover,
+.create_block_btn2:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.02);
+}
+
+.create_block_btn1:active,
+.create_block_btn2:active {
+  transform: translateY(0);
+}
+
+/* До 620px — делаем полноширинными */
+@media (max-width: 620px) {
+  .create_block_btn1,
+  .create_block_btn2 {
+    width: 100%;
+    justify-self: stretch;
+  }
+}
+/* =============== СПИСОК ЗАМЕТОК =============== */
+.block__flex {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: clamp(10px, 2.4vw, 16px);
+  padding: clamp(12px, 3vw, 20px);
+}
+
+/* Карточка */
+.note {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  margin: 0;
+  word-break: break-word;
+}
+
+.note:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+.note h3 {
+  margin: 0 0 8px 0;
+  font-size: var(--note-title);
+  color: #333;
+  line-height: 1.25;
+}
+
+.note p {
+  margin: 0;
+  font-size: var(--note-text);
+  color: #555;
+  line-height: 1.45;
+}
+
+/* Кнопки карточки */
+.note_btn, .note_btn2 {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.15s ease, filter 0.1s ease;
+  margin: 10px 6px 0 0;
+  cursor: pointer;
+  font: inherit;
+}
+
+.note_btn:hover,
+.note_btn2:hover {
+  transform: translateY(-2px);
+}
+
+.note_btn:active,
+.note_btn2:active {
+  transform: translateY(0);
+}
+
+.note .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* =============== МОДАЛКА (редактирование) =============== */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+}
+
+.modal.is-open {
+  display: block;
+}
+
+.modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.modal__dialog {
+  position: relative;
+  margin: 8vh auto;
+  max-width: min(620px, 92vw);
+  max-height: calc(100dvh - 16vh);
+  overflow: auto;
+  background: #fff;
+  color: #222;
+  border: 1px solid #e6e8ea;
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  padding: clamp(14px, 3vw, 20px);
+}
+
+.modal__close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #f7f8f9;
+  border: 1px solid #e6e8ea;
+  cursor: pointer;
+}
+
+.modal__close:hover {
+  background: #eef0f2;
+}
+
+#editForm {
+  display: grid;
+  gap: 12px;
+}
+
+.edit-title, .edit-text {
+  width: 100%;
+  border: 1px solid #e6e8ea;
+  border-radius: 10px;
+  background: #fafafa;
+  color: #222;
+  padding: 10px 12px;
+  font-size: clamp(14px, 2.4vw, 15px);
+}
+
+.edit-text {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.modal__actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.btn-save {
+  background: #3a7afe;
+  border: 1px solid #3a7afe;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn-save:hover {
+  filter: brightness(0.95);
+}
+
+.btn-delete-in-modal {
+  background: #fdecec;
+  border: 1px solid #f7c7c7;
+  color: #e55353;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn-delete-in-modal:hover {
+  background: #ffdede;
+}
+
+@media (max-width: 520px) {
+  .modal__dialog {
+    margin: 10vh 10px;
+  }
+}
+/* =============== ДОП. МЕЛОЧИ ДЛЯ МОБИЛКИ =============== */
+@media (max-width: 640px) {
+  .create_hidden__flex {
+    min-width: 100%;
+    width: 100%;
+  }
+  .create__btn {
+    padding-inline: 20px;
+  }
+}
+/* High-DPI/Retina и доступность */
+:focus-visible {
+  outline: 3px solid #3a7afe;
+  outline-offset: 2px;
+}/*# sourceMappingURL=style.css.map */
